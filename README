@@ -6,8 +6,8 @@
 # status v1.0 [ping from dst]
 
 Description :
-We need check server's status sometimes, for example we power on server and we will checking server status [up or down]. this problem solved by 'status' program. just run program like this : status 192.168.1.1
-when server uped, program will sending message in terminal and show notification on your desktop.
+We need to checking server's status sometimes, for example we power on server and we will checking server status [up or down]. this problem solved by 'status' program. just run program like this : status 192.168.1.1
+when server uped, program print message in terminal and show notification on your desktop.
 
 Dependencies:
 	1. ping
