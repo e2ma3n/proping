@@ -31,7 +31,7 @@ function check {
 function install {
 	privilege
 	echo "[+] Installing program ..."
-	[ -d /usr/bin/ ] && cp status.sh /usr/bin/status && chmod +x /usr/bin/status && echo "[+] Done" || echo "[-] Error: /usr/bin/ not found"
+	[ -d /usr/bin/ ] && cp status.sh /usr/bin/status && chmod 755 /usr/bin/status && echo "[+] Done" || echo "[-] Error: /usr/bin/ not found"
 }
 
 case $1 in
