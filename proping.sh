@@ -4,7 +4,7 @@
 # Github : http://Github.com/e2ma3n
 # Website : http://OSLearn.ir
 # License : GPL v3.0
-# status v1.0 [ping from dst]
+# proping v1.0 [ping from dst]
 
 # check number of arguments
 [ "$#" != "1" ] && echo "[-] Error: Bad argument" && echo "[+] See help : $0 -h" && exit 1
@@ -13,14 +13,6 @@
 if [ "$1" = "-h" ] ; then
 	echo "Usage: "
 	echo "   $0 [IP Address] : for check host's status"
-	echo "   $0 -u : for uninstall program"
-	exit 0
-fi
-
-# check argument for show uninstall mode
-if [ "$1" = "-u" ] ; then
-	[ "`whoami`" != "root" ] && echo -e '[-] Please use root user or sudo' && exit 1
-	[ `rm -f /usr/bin/status &> /dev/null` ] && echo "[+] /usr/bin/status removed" || echo "[-] Error : /usr/bin/status not removed"
 	exit 0
 fi
 
