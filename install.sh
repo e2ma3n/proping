@@ -4,7 +4,7 @@
 # Github : http://Github.com/e2ma3n
 # Website : http://OSLearn.ir
 # License : GPL v3.0
-# status v1.0 [ping from dst]
+# proping v1.0 [ping from dst]
 
 # check root privilege
 function privilege {
@@ -31,7 +31,7 @@ function check {
 function install {
 	privilege
 	echo "[+] Installing program ..."
-	[ -d /usr/bin/ ] && cp status.sh /usr/bin/status && chmod 755 /usr/bin/status && echo "[+] Done" || echo "[-] Error: /usr/bin/ not found"
+	[ -d /usr/bin/ ] && cp proping.sh /usr/bin/proping && chmod 755 /usr/bin/proping && echo "[+] Done" || echo "[-] Error: /usr/bin/ not found"
 }
 
 case $1 in
