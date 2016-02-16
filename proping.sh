@@ -7,48 +7,24 @@
 # proping v2.0 [ping from destination]
 #--------------------------------------------------------#
 
-# check root privilege
-[ "`whoami`" != "root" ] && echo -e '[-] Please use root user or sudo' && exit 1
+# check number of arguments
+[ "$#" != "1" ] && echo "[-] Error: Bad argument" && echo "[+] See help : proping -h" && exit 1
 
-
-# help function
-function help_f {
+# check argument for show help mode
+if [ "$1" = "-h" ] ; then
 	echo "Usage: "
-	echo "	sudo ./install.sh -i [install program]"
-	echo "	sudo ./install.sh -c [check dependencies]"
-}
+	echo "   proping [IP Address] : for check host's status"
+	exit 0
+fi
 
-
-# check dependencies on system
-function check_f {
-	echo "[+] check dependencies on system:  "
-	for program in whoami ping zenity sleep
-	do
-		if [ ! -z `which $program 2> /dev/null` ] ; then
-			echo -e "[+] $program found"
-		else
-			echo -e "[-] Error: $program not found"
-		fi
-	done
-}
-
-
-# install program clearly
-function install {
-	[ ! -d /opt/proping_v2/ ] && mkdir -p /opt/proping_v2/ && echo "[+] Directory created" || echo "[-] Error: /opt/proping_v2/ exist"
-	sleep 1
-	[ ! -f /opt/proping_v2/proping.sh ] && cp proping.sh /opt/proping_v2/ && chmod 755 /opt/proping_v2/proping.sh && echo "[+] proping.sh copied" || echo "[-] Error: /opt/proping_v2/proping.sh exist"
-	sleep 1
-	[ -f /opt/proping_v2/proping.sh ] && ln -s /opt/proping_v2/proping.sh /usr/bin/proping && echo "[+] symbolic link created" || echo "[-] Error: symbolic link not created"
-	sleep 1
-	[ ! -f /opt/proping_v2/README ] && cp README /opt/proping_v2/README && chmod 644 /opt/proping_v2/README && echo "[+] README copied" || echo "[-] Error: /opt/proping_v2/README exist"
-	sleep 1
-	echo "[+] Please see README"
-}
-
-
-case $1 in
-	-i) install_f ;;
-	-c) check_f ;;
-	*) help_f ;;
-esac
+for (( ;; )) ; do
+	ping $1 -c 1 &> /dev/null
+	if [ "$?" = "0" ] ; then
+		echo "[+] $1 is up"
+		zenity --timeout=1 --notification --text "$1 is up now" &> /dev/null
+		exit 0
+	else
+		echo "[-] Host is down, whait 5 second"
+		sleep 5
+	fi
+done
