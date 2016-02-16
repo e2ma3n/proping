@@ -37,6 +37,6 @@ Uninstall proping v2.0:
 	2. sudo rm -f /usr/bin/proping
 
 
-Tested sshc on :
+Tested proping on :
 	0. LMDE2 mate desktop - 3.16.0-4-amd64
 	1. chromixium 1.5 - 3.13.0-66-generic
