@@ -34,7 +34,7 @@ function check_f {
 
 
 # install program clearly
-function install {
+function install_f {
 	[ ! -d /opt/proping_v2/ ] && mkdir -p /opt/proping_v2/ && echo "[+] Directory created" || echo "[-] Error: /opt/proping_v2/ exist"
 	sleep 1
 	[ ! -f /opt/proping_v2/proping.sh ] && cp proping.sh /opt/proping_v2/ && chmod 755 /opt/proping_v2/proping.sh && echo "[+] proping.sh copied" || echo "[-] Error: /opt/proping_v2/proping.sh exist"
