@@ -1,31 +1,54 @@
 #! /bin/bash
 # Programming and idea by : E2MA3N [Iman Homayouni]
+# Gitbub : https://github.com/e2ma3n
 # Email : e2ma3n@Gmail.com
-# Github : http://Github.com/e2ma3n
 # Website : http://OSLearn.ir
 # License : GPL v3.0
-# proping v1.0 [ping from dst]
+# proping v2.0 [ping from destination]
+#--------------------------------------------------------#
 
-# check number of arguments
-[ "$#" != "1" ] && echo "[-] Error: Bad argument" && echo "[+] See help : $0 -h" && exit 1
+# check root privilege
+[ "`whoami`" != "root" ] && echo -e '[-] Please use root user or sudo' && exit 1
 
-# check argument for show help mode
-if [ "$1" = "-h" ] ; then
+
+# help function
+function help_f {
 	echo "Usage: "
-	echo "   $0 [IP Address] : for check host's status"
-	exit 0
-fi
+	echo "	sudo ./install.sh -i [install program]"
+	echo "	sudo ./install.sh -c [check dependencies]"
+}
 
-i="0" ; j="0"
-for (( i=1 ;; i++ )) ; do
-	ping $1 -c 1 &> /dev/null
-	if [ "$?" = "0" ] ; then
-		echo "[+] $1 is up"
-		if [ 3 -lt $i ] ; then
-			zenity --timeout=1 --notification --text "$1 is up now" &> /dev/null
+
+# check dependencies on system
+function check_f {
+	echo "[+] check dependencies on system:  "
+	for program in whoami ping zenity sleep
+	do
+		if [ ! -z `which $program 2> /dev/null` ] ; then
+			echo -e "[+] $program found"
+		else
+			echo -e "[-] Error: $program not found"
 		fi
-		exit 0
-	fi
-	sleep 3 ; b=$[$i%20]
-	[ "$b" = "0" ] && j=$[$j+2] && echo "[!] $j minutes passed ..."
-done
+	done
+}
+
+
+# install program clearly
+function install {
+	[ ! -d /opt/proping_v2/ ] && mkdir -p /opt/proping_v2/ && echo "[+] Directory created" || echo "[-] Error: /opt/proping_v2/ exist"
+	sleep 1
+	[ ! -f /opt/proping_v2/proping.sh ] && cp proping.sh /opt/proping_v2/ && chmod 755 /opt/proping_v2/proping.sh && echo "[+] proping.sh copied" || echo "[-] Error: /opt/proping_v2/proping.sh exist"
+	sleep 1
+	[ -f /opt/proping_v2/proping.sh ] && ln -s /opt/proping_v2/proping.sh /usr/bin/proping && echo "[+] symbolic link created" || echo "[-] Error: symbolic link not created"
+	sleep 1
+	[ ! -f /opt/proping_v2/README ] && cp README /opt/proping_v2/README && chmod 644 /opt/proping_v2/README && echo "[+] README copied" || echo "[-] Error: /opt/proping_v2/README exist"
+	sleep 1
+	echo "[+] Please see README"
+}
+
+
+case $1 in
+	-i) install_f ;;
+	-c) check_f ;;
+	*) help_f ;;
+esac
