@@ -38,5 +38,6 @@ Uninstall proping v2.0:
 
 
 Tested proping on :
-	0. LMDE2 mate desktop, 3.16.0-4-amd64 - ping utility, iputils-s20121221 
-	1. chromixium 1.5, 3.13.0-66-generic
+	1. LMDE2 mate desktop, 3.16.0-4-amd64 - ping utility, iputils-s20121221 
+	2. chromixium 1.5, 3.13.0-66-generic
+	3. CentOS 6.3, 2.6.32-279.el6.i686 - ping utility, iputils-sss20071127
