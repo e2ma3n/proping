@@ -7,7 +7,7 @@ proping v2.0 [ping from destination]
 
 
 Description :
-We need to check server's status sometimes, for example we start power on server and we must check server's status manually [using ping command]. this problem solved by 'proping' program. just run program like this : proping 192.168.1.1
+Proping is a client side program for checking server's status. sometimes, we start power on server and we must check server's status manually [using ping command]. this problem solved by 'proping' program. just run program like this : proping 192.168.1.1
 when server went up, program print message in terminal and shows notification on your desktop.
 
 
@@ -38,5 +38,5 @@ Uninstall proping v2.0:
 
 
 Tested proping on :
-	0. LMDE2 mate desktop - 3.16.0-4-amd64
-	1. chromixium 1.5 - 3.13.0-66-generic
+	0. LMDE2 mate desktop, 3.16.0-4-amd64 - ping utility, iputils-s20121221 
+	1. chromixium 1.5, 3.13.0-66-generic
