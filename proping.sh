@@ -17,14 +17,30 @@ if [ "$1" = "-h" ] ; then
 	exit 0
 fi
 
-for (( ;; )) ; do
+# check ip address
+re='^[0-9]+$'
+if ! [[ `echo $1 | tr -d .` =~ $re ]] ; then
+	echo "[-] Error: $1 Not a IP address" 
+	echo "[+] See help : proping -h"
+	exit 1
+fi
+
+for (( i=1 ;; i++ )) ; do
 	ping $1 -c 1 &> /dev/null
-	if [ "$?" = "0" ] ; then
-		echo "[+] $1 is up"
-		zenity --timeout=1 --notification --text "$1 is up now" &> /dev/null
+	p=$?
+	if [ "$p" = "0" ] ; then
+		[ "$j" = "1" ] && echo
+		echo -e "[+] $1 is up"
+		if [ "$i" -gt "3" ] ; then
+			zenity --timeout=1 --notification --text "$1 is up now" &> /dev/null
+		fi
 		exit 0
-	else
-		echo "[-] Host is down, whait 5 second"
+	elif [ "$p" = "1" ] ; then
+		echo -en "[-] $i ICMP echo request sended, no response from destination\r"
+		j=1
 		sleep 5
+	else
+		echo "[-] Error !"
+		exit 1
 	fi
 done
