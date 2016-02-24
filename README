@@ -16,6 +16,7 @@ Dependencies:
 	2. sleep
 	3. zenity
 	4. whoami
+	5. bc
 
 
 Check dependencies :
