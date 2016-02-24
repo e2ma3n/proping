@@ -22,7 +22,7 @@ function help_f {
 # check dependencies on system
 function check_f {
 	echo "[+] check dependencies on system:  "
-	for program in whoami ping zenity sleep
+	for program in whoami ping zenity sleep bc
 	do
 		if [ ! -z `which $program 2> /dev/null` ] ; then
 			echo -e "[+] $program found"
