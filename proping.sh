@@ -35,13 +35,13 @@ for (( i=1 ;; i++ )) ; do
 			zenity --timeout=1 --notification --text "$1 is up now" &> /dev/null
 		fi
 		ping_out=`ping -c 4 $1`
-		ping_out=`echo "$ping_out" | grep -o -P '.{0,0}time=.{0,}' | cut -d '=' -f 2 | cut -d ' ' -f 1`
-		avg=0
-		for delay in `echo $ping_out` ; do
-			avg=`echo $delay + $avg | bc -l`
-		done
-		delay=`echo $avg / 4 | bc -l | cut -d '.' -f 1`
-		echo "[+] Delay nearly is $delay ms"
+		echo -en "[+] " ; echo "$ping_out" | tail -n 2 | head -n 1 | cut -d "," -f 1,2,3
+		min=`echo "$ping_out" | tail -n 1 | cut -d "=" -f 2 | cut -d "/" -f 1 | tr -d " "`
+		avg=`echo "$ping_out" | tail -n 1 | cut -d "=" -f 2 | cut -d "/" -f 2`
+		max=`echo "$ping_out" | tail -n 1 | cut -d "=" -f 2 | cut -d "/" -f 3`
+		echo -e "[+] Min time: $min ms"
+		echo -e "[+] Avg time: $avg ms"
+		echo -e "[+] Max time: $max ms"
 		exit 0
 	elif [ "$p" = "1" ] ; then
 		echo -en "[-] $i ICMP echo request sended, no response from destination\r"
